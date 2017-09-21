@@ -1,0 +1,7 @@
+@font-face{font-family:OpenDyslexic;src:url(https://samclercky.github.io/Dyxitool/fonts/OpenDyslexic-Regular.otf);font-style:normal;font-weight:400}
+@font-face{font-family:OpenDyslexic;src:url(https://samclercky.github.io/Dyxitool/fonts/OpenDyslexic-Italic.otf);font-style:italic;font-weight:400}
+@font-face{font-family:OpenDyslexic;src:url(https://samclercky.github.io/Dyxitool/fonts/OpenDyslexic-Bold.otf);font-weight:700;font-style:bold}
+@font-face{font-family:OpenDyslexic;src:url(https://samclercky.github.io/Dyxitool/fonts/OpenDyslexic-BoldItalic.otf);font-weight:700;font-style:italic}
+@font-face{font-family:OpenDyslexicMono;src:url(https://samclercky.github.io/Dyxitool/fonts/OpenDyslexicMono-Regular.otf);font-weight:400;font-style:normal}
+
+*:not(.fa), html:not(.fa), body:not(.fa), h1:not(.fa), h2:not(.fa), h3:not(.fa), h4:not(.fa), h5:not(.fa), h6:not(.fa), p:not(.fa), span:not(.fa), div:not(.fa), code:not(.fa) {font-family: "OpenDyslexic" !important; line-height: 150%;} code,pre{font-family: OpenDyslexicMono !important;}
