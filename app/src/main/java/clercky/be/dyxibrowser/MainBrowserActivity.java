@@ -30,6 +30,7 @@ public class MainBrowserActivity extends AppCompatActivity {
     Button backBtn;
     Button fwdBtn;
     ProgressBar loadBar;
+    String currUrl = "";
 
     public static boolean canLoadJs = false;
 
@@ -72,6 +73,7 @@ public class MainBrowserActivity extends AppCompatActivity {
             }
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                currUrl = url;
                 updateUri(url);
                 canLoadJs = true;
                 // TODO: set favicon
@@ -128,7 +130,7 @@ public class MainBrowserActivity extends AppCompatActivity {
     }
 
     public void goPage(String uri) {
-        if (wb.getUrl() == uri) return;
+        if (currUrl == uri) return;
 
         if (!uri.startsWith("http"))
             uri = "https://www.google.be/#q=" + uri;
@@ -178,6 +180,7 @@ public class MainBrowserActivity extends AppCompatActivity {
     public void injectScriptFile(WebView view, String scriptFile) {
         if (!canLoadJs) return;
 
+        canLoadJs = false;
         InputStream input;
         try {
             input = getAssets().open(scriptFile);
