@@ -1,5 +1,6 @@
 package clercky.be.dyxibrowser;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -9,6 +10,8 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import clercky.be.dyxibrowser.font.FontManager;
 
 public class MainBrowserActivity extends AppCompatActivity {
     WebViewManager wvm;
@@ -32,6 +35,9 @@ public class MainBrowserActivity extends AppCompatActivity {
         backBtn = (Button) findViewById(R.id.backBtn);
         fwdBtn = (Button) findViewById(R.id.fwdBtn);
         loadBar = (ProgressBar) findViewById(R.id.loaddBar);
+
+        Typeface font = FontManager.getTypeFace(getApplicationContext(), FontManager.FONTAWESOME);
+        FontManager.markAsIconContainer(findViewById(R.id.wrapper), font, getResources().getString(R.string.fa_tag));
 
         wvm = new WebViewManager(this, wb, loadBar);
         wvm.setCallback(new WebViewManager.URLChangedCallback() {

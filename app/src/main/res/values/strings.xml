@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DyxiBrowser</string>
+    <string name="fa_tag">fa_enabled</string>
+
+    <string name="fa_arrow_circle_o_right">&#xf18e;</string>
+    <string name="fa_arrow_circle_o_left">&#xf190;</string>
 </resources>
