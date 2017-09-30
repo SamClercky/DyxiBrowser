@@ -35,9 +35,12 @@ public class WebViewManager implements UpdateUrl {
         webSettings.setDomStorageEnabled(true);
         webSettings.setDatabaseEnabled(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setDisplayZoomControls(false);
-        wb.setWebViewClient(new WebClient(this));
+        wb.setWebViewClient(new WebClient(ctx, this));
         wb.setWebChromeClient(new ChromeClient(ctx, loadBar));
         goPage("https://www.google.be");
 

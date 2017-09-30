@@ -1,31 +1,14 @@
 package clercky.be.dyxibrowser;
 
-import android.annotation.TargetApi;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.webkit.CookieManager;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import clercky.be.dyxibrowser.clients.ChromeClient;
-import clercky.be.dyxibrowser.clients.WebClient;
 
 public class MainBrowserActivity extends AppCompatActivity {
     WebViewManager wvm;
@@ -33,9 +16,6 @@ public class MainBrowserActivity extends AppCompatActivity {
     Button backBtn;
     Button fwdBtn;
     ProgressBar loadBar;
-    String currUrl = "";
-
-    public static boolean canLoadJs = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
