@@ -8,11 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Theme.noTitle" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="Theme.noTitle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="Theme.noTitle.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.noTitle.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
