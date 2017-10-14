@@ -1,6 +1,7 @@
 package clercky.be.dyxibrowser;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -25,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -40,6 +46,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // create fragments
         manager = new FragmentManager(this, R.id.fragmentContainter);
         manager.goTo(currentFragment);
+
+        /*((MainBrowserFragment)manager.GetInstanceOfFragment(FragmentChooser.Browser)).createUI(
+                (EditText) findViewById(R.id.search_bar),
+                (ProgressBar) findViewById(R.id.loaddBar)
+        );*/
+
+        // set scroll
+        /*MainBrowserFragment browser = (MainBrowserFragment)manager.GetInstanceOfFragment(FragmentChooser.Browser);
+        browser.setScrollListener(new WebViewManager.ScollListener() {
+            @Override
+            public void onScroll(int diffT) {
+                AppBarLayout bar = (AppBarLayout) findViewById(R.id.appBarLayout);
+                ViewGroup.LayoutParams params = bar.getLayoutParams();
+                if (diffT > 0){ // scroll up
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                } else if (diffT < 0) { // scroll down
+                    bar.getLayoutParams().height = 0;
+                }
+                //bar.setLayoutParams(params);
+            }
+        });*/
     }
 
     @Override

@@ -1,6 +1,9 @@
 package clercky.be.dyxibrowser;
 
 import android.content.Context;
+import android.os.Build;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -56,7 +59,8 @@ public class WebViewManager implements UpdateUrl {
         //if (currUrl == uri) return;
 
         if (!uri.startsWith("http"))
-            uri = "https://www.google.be/#q=" + uri;
+            uri = uri.replace(" ", "+");
+            uri = "https://www.google.be/search?q=" + uri;
 
         wb.loadUrl(uri);
 
@@ -94,7 +98,37 @@ public class WebViewManager implements UpdateUrl {
         this.callback = callback;
     }
 
+    public void setScrollListener (final ScollListener callback) {
+        /*wb.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        callback.onScroll(1);
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        callback.onScroll(-1);
+                        break;
+                }
+
+                return false;
+            }
+        });*/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            wb.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    callback.onScroll(scrollY - oldScrollY);
+                }
+            });
+        }
+    }
+
     public interface URLChangedCallback {
         public void onURLChanged(String url);
+    }
+
+    public interface ScollListener {
+        public void onScroll(int diffT);
     }
 }

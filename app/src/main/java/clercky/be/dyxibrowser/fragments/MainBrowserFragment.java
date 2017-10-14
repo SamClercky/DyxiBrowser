@@ -3,14 +3,14 @@ package clercky.be.dyxibrowser.fragments;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import java.util.ArrayList;
 
 import clercky.be.dyxibrowser.R;
 import clercky.be.dyxibrowser.WebViewManager;
@@ -21,8 +21,8 @@ public class MainBrowserFragment extends Fragment {
 
     WebViewManager wvm;
     EditText uriEditText;
-    Button fwdBtn;
     ProgressBar loadBar;
+    ArrayList<WebViewManager.ScollListener> scrollCalbacks = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,10 +37,10 @@ public class MainBrowserFragment extends Fragment {
         createUI();
     }
 
-    private void createUI() {
+    public void createUI() {
+
         WebView wb = (WebView) getActivity().findViewById(R.id.webview);
-        uriEditText = (EditText) getActivity().findViewById(R.id.uriEditText);
-        fwdBtn = (Button) getActivity().findViewById(R.id.fwdBtn);
+        uriEditText = (EditText) getActivity().findViewById(R.id.search_bar);
         loadBar = (ProgressBar) getActivity().findViewById(R.id.loaddBar);
 
         Typeface font = FontManager.getTypeFace(getActivity().getApplicationContext(), FontManager.FONTAWESOME);
@@ -62,12 +62,6 @@ public class MainBrowserFragment extends Fragment {
                 }
             }
         });
-        fwdBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wvm.goForward();
-            }
-        });
     }
 
     public void onGoPage() {
@@ -75,22 +69,28 @@ public class MainBrowserFragment extends Fragment {
     }
 
     public void updateUri(String uri) {
-        enableBtn();
         // update uriEditText
         if (uriEditText == null) return;
 
         uriEditText.setText(uri);
     }
 
-    public void enableBtn() {
-        if (wvm.canGoForward()) {
-            fwdBtn.setEnabled(true);
-        } else {
-            fwdBtn.setEnabled(false);
-        }
-    }
-
     public void goBack() {
         wvm.goBack();
+    }
+    public void goForward() { wvm.goForward(); }
+
+    public void setScrollListener(WebViewManager.ScollListener callback) {
+        if (wvm == null) {
+            scrollCalbacks.add(callback); // save for later
+        } else {
+            if (callback == null) {
+                for (int i = 0; i < scrollCalbacks.size(); i++) {
+                    wvm.setScrollListener(scrollCalbacks.get(i));
+                }
+            } else {
+                wvm.setScrollListener(callback);
+            }
+        }
     }
 }
